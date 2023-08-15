@@ -3,22 +3,23 @@ import dotenv from "dotenv";
 dotenv.config();
 
 (async () => {
-// Initialize with Private Key
-const sdk = ThirdwebSDK.fromPrivateKey(process.env.PRIVATE_KEY, "binance");
+    // Initialize with Private Key
+    const sdk = ThirdwebSDK.fromPrivateKey(
+        process.env.PRIVATE_KEY, // Your wallet's private key (only required for write operations)
+        "ethereum",
+        {
+          clientId: "YOUR_CLIENT_ID", // Use client id if using on the client side, get it from dashboard settings
+          secretKey: "YOUR_SECRET_KEY", // Use secret key if using on the server, get it from dashboard settings
+        },
+      );
 
-// Initialize with Secret Key
-const readOnlySdk = new ThirdwebSDK("binance", {
-    secretKey: "YOUR_SECRET_KEY"
-});
 
-    
 
-    const packAddress ="0x41C3778a435CD8D911cD5BbE8fDc50438115BFDE";
-    const cardAddress ="0xB8a33200A4a09d8c5F5313D6a19A9609B916479e";
+    const packAddress = "0x41C3778a435CD8D911cD5BbE8fDc50438115BFDE";
+    const cardAddress = "0xB8a33200A4a09d8c5F5313D6a19A9609B916479e";
 
-    const pack = sdk.getContract(packAddress, "pack");
-
-    const card = sdk.getContract(cardAddress, "edition");
+    const pack = privateKeySdk.getContract(packAddress, "pack");
+    const card = privateKeySdk.getContract(cardAddress, "edition");
     await (await card).setApprovalForAll(packAddress, true);
     console.log("Approved card contract to transfer cards to pack contract");
 
