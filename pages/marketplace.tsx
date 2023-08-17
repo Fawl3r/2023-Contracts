@@ -1,4 +1,4 @@
-import { useContract, useValidDirectListings } from "@thirdweb-dev/react";
+import { useContract, useDirectListings } from "@thirdweb-dev/react";
 import styles from "../styles/Home.module.css";
 import { CARD_ADDRESS, MARKETPLACE_ADDRESS } from "../const/addresses";
 import NFTCard from "../components/NFT";
@@ -10,7 +10,7 @@ export default function Marketplace() {
     const {
         data: directListings,
         isLoading: loadingDirectListings,
-    } = useValidDirectListings(
+    } = useDirectListings(
         marketplace,
         {
             tokenContract: CARD_ADDRESS,
